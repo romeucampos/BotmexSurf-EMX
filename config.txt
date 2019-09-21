@@ -1,0 +1,7 @@
+{
+    "key": "",
+    "secret": "",
+    "url" : "http://api.testnet.emx.com",
+    "amount_btc": 5,
+    "interval": 10
+}
