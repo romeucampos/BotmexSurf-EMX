@@ -32,8 +32,8 @@ except Exception as e:
 
 def profit():
     balance_last = client.get_balances(accounts)['token_balances']['btc']
-    rsp = log(float(balance_last)/float(balance))
-    return f'balance last: {balance_last} - profit: {rsp}%'
+    rsp = log(round(float(balance_last), 4)/round(float(balance), 4)) * 100
+    return f'balance last: {balance_last} - profit: {rsp:.2f}%'
 
 
 def trend():
@@ -74,17 +74,13 @@ def first_order():
             break
 
 
-
-def main():
-    first_order()
-
-
+def orders():
     while True:
         try:
             signal = trend()
             if signal['trend'] == 'LONG':
                 position = client.positions()['positions'][0]['quantity']                
-                if config["contract"] < float(position):
+                if config["amount_btc"] < float(position):
                     long = client.create_new_order_makert(
                                                             contract_code='BTC-PERP', 
                                                             order_type='market', 
@@ -95,7 +91,7 @@ def main():
 
             if signal['trend'] == 'SHORT':
                 position = client.positions()['positions'][0]['quantity']
-                if - config["contract"] < float(position):
+                if - config["amount_btc"] < float(position):
                     short = client.create_new_order_makert(
                                                             contract_code='BTC-PERP',
                                                             order_type='market',
@@ -111,6 +107,10 @@ def main():
             logging.info(e)
             break
 
+
+def main():
+    # first_order()
+    orders()
 
 if __name__ == '__main__':
     main()
