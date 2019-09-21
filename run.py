@@ -109,7 +109,7 @@ def orders():
 
 
 def main():
-    # first_order()
+    first_order()
     orders()
 
 if __name__ == '__main__':
