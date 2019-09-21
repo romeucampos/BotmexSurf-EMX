@@ -1,4 +1,5 @@
 ## BotmexSurf-EMX
+![Alt Text](https://user-images.githubusercontent.com/48535364/65366748-5f62d700-dbfe-11e9-824c-f0521562b1a6.png)
 
 Esse BOT é um seguidor de tendencia com base na API https://anubis.website/api/anubis/trend/ ele irá surfar a tendência e ter micro stops em consolidação, está em fase beta, pode testar na TESTNET da EMX https://testnet.emx.com/trader ou em produção também!
 
