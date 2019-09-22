@@ -51,7 +51,7 @@ def first_order():
 
             if signal['trend'] != sinal_first['trend']:
                 if signal['trend'] == 'LONG':
-                    long = client.create_new_order_makert(  
+                    long = client.create_new_order_market(  
                                                             contract_code='BTC-PERP', 
                                                             order_type='market', 
                                                             order_side='buy', 
@@ -59,7 +59,7 @@ def first_order():
                     
                     logging.info(long)
                 else:
-                    short = client.create_new_order_makert(
+                    short = client.create_new_order_market(
                                                             contract_code='BTC-PERP',
                                                             order_type='market', 
                                                             order_side='sell', 
@@ -74,14 +74,14 @@ def first_order():
             break
 
 
-def orders():
+def simple_strategy():
     while True:
         try:
             signal = trend()
             if signal['trend'] == 'LONG':
                 position = client.positions()['positions'][0]['quantity']                
                 if config["amount_btc"] < float(position):
-                    long = client.create_new_order_makert(
+                    long = client.create_new_order_market(
                                                             contract_code='BTC-PERP', 
                                                             order_type='market', 
                                                             order_side='buy', 
@@ -92,7 +92,7 @@ def orders():
             if signal['trend'] == 'SHORT':
                 position = client.positions()['positions'][0]['quantity']
                 if - config["amount_btc"] < float(position):
-                    short = client.create_new_order_makert(
+                    short = client.create_new_order_market(
                                                             contract_code='BTC-PERP',
                                                             order_type='market',
                                                             order_side='sell',
@@ -110,7 +110,7 @@ def orders():
 
 def main():
     first_order()
-    orders()
+    simple_strategy()
 
 if __name__ == '__main__':
     main()
