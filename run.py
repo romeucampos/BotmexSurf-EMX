@@ -58,6 +58,7 @@ def first_order():
                                                             size=str(config["amount_btc"]))
                     
                     logging.info(long)
+                    time.sleep(config["interval"])
                 else:
                     short = client.create_new_order_market(
                                                             contract_code='BTC-PERP',
@@ -66,6 +67,7 @@ def first_order():
                                                             size=str(config["amount_btc"]))
                     
                     logging.info(short)
+                    time.sleep(config["interval"])
                 break
             time.sleep(config["interval"])
 
