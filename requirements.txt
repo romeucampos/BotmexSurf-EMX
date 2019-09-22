@@ -1,2 +1,2 @@
 requests
--e git+https://github.com/romeucampos/emx-python.git@master#egg=emx-python
+-e git+https://github.com/romeucampos/emx-python.git@a7dd040f1b3817eb375401aa360453473c2f6034#egg=emx-python
