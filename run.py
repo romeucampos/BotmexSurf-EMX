@@ -82,7 +82,7 @@ def simple_strategy():
             signal = trend()
             if signal['trend'] == 'LONG':
                 position = client.positions()['positions'][0]['quantity']                
-                if config["amount_btc"] < float(position):
+                if config["amount_btc"] > float(position):
                     long = client.create_new_order_market(
                                                             contract_code='BTC-PERP', 
                                                             order_type='market', 
