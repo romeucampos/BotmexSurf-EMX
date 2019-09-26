@@ -51,19 +51,19 @@ def first_order():
 
             if signal['trend'] != sinal_first['trend']:
                 if signal['trend'] == 'LONG':
-                    long = client.create_new_order_market(  
-                                                            contract_code='BTC-PERP', 
-                                                            order_type='market', 
-                                                            order_side='buy', 
+                    long = client.create_new_order(
+                                                            contract_code='BTC-PERP',
+                                                            order_type='market',
+                                                            order_side='buy',
                                                             size=str(config["amount_btc"]))
                     
                     logging.info(long)
                     time.sleep(config["interval"])
                 else:
-                    short = client.create_new_order_market(
+                    short = client.create_new_order(
                                                             contract_code='BTC-PERP',
-                                                            order_type='market', 
-                                                            order_side='sell', 
+                                                            order_type='market',
+                                                            order_side='sell',
                                                             size=str(config["amount_btc"]))
                     
                     logging.info(short)
@@ -81,20 +81,20 @@ def simple_strategy():
         try:
             signal = trend()
             if signal['trend'] == 'LONG':
-                position = client.positions()['positions'][0]['quantity']                
+                position = client.get_positions()[0]['quantity']
                 if config["amount_btc"] > float(position):
-                    long = client.create_new_order_market(
-                                                            contract_code='BTC-PERP', 
-                                                            order_type='market', 
-                                                            order_side='buy', 
+                    long = client.create_new_order(
+                                                            contract_code='BTC-PERP',
+                                                            order_type='market',
+                                                            order_side='buy',
                                                             size=str(config["amount_btc"]*2))
                     
                     logging.info(signal, long)
 
             if signal['trend'] == 'SHORT':
-                position = client.positions()['positions'][0]['quantity']
+                position = client.get_positions()[0]['quantity']
                 if - config["amount_btc"] < float(position):
-                    short = client.create_new_order_market(
+                    short = client.create_new_order(
                                                             contract_code='BTC-PERP',
                                                             order_type='market',
                                                             order_side='sell',
